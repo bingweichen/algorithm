@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class HeapSort {
+    public int[] heapSort(int[] A, int n) {
+        // write code here
+        for(int i=n/2-1;i>=0;i--){
+            adjust(A,i,n);
+        }
+        for(int i=n-1;i>0;i--){
+            swap(A,0,i);
+            adjust(A,0,i);
+        }
+        return A;
+    }
+    
+    public void adjust(int[] A,int index, int length){
+        int temp = A[index];
+        int childleft = index*2+1;
+        
+        for(;index*2+1<length;index=childleft){
+            childleft = index*2+1;
+            int childright = childleft+1;
+            
+            if(childleft<length-1&&A[childleft]<A[childright]){
+                childleft++;
+            }            
+            if(A[index]>A[childleft]) break;
+            else {
+                swap(A,index,childleft);               
+                index=childleft;
+            }
+        }
+    }
+    public void swap(int[] A,int a, int b){
+        int temp=A[a];
+        A[a]=A[b];
+        A[b]=temp;
+    }
+}
