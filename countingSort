@@ -1,0 +1,31 @@
+import java.util.*;
+
+public class CountingSort {
+    public int[] countingSort(int[] A, int n) {
+        // write code here
+        int min=A[0];
+        int max=A[0];
+        
+        for(int i=1;i<n;i++){
+           if(min>A[i]) min=A[i];
+           if(max<A[i]) max=A[i];
+        }
+        
+        int [] countArray= new int [max-min+1];
+        
+        for(int i=0;i<n;i++){
+            countArray[A[i]-min]++;
+        }    
+        
+        int count=0;
+        for(int i=0;i<max-min+1;i++){
+            while(countArray[i]>0){
+                A[count]=i+min;
+                countArray[i]--;
+                count++;
+            }
+        }
+        return A;
+        
+    }
+}
